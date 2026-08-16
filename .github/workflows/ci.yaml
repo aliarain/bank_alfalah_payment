@@ -38,4 +38,7 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
+      # Surface any files the Flutter tool rewrites during pub get, so a
+      # dirty-tree publish warning is diagnosable straight from the log.
+      - run: git status --short && git diff
       - run: dart pub publish --dry-run
